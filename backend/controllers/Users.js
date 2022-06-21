@@ -53,3 +53,44 @@ export const Delete = async (req, res) => {
   });
   res.json({ msg: req.body.english + "----- successfully deleted" });
 };
+
+//extension field
+export const getSelector = async(req, res) =>{
+  // res.header("Access-Control-Allow-Origin", "*"); 
+
+  try {
+    const users = await Users.findAll({
+      attributes: ["selector", "spanish", "french"],
+    });
+    res.json(users)
+    console.log(res.json(users));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const createSelector = async(req, res) =>{
+  // res.header("Access-Control-Allow-Origin", "*"); 
+  let english = req.body.english
+  try {
+    english.map((item, index) => {
+      Users.update(
+        {
+          english: item[Object.keys(item)]
+        },
+        {
+          where: {
+            selector: Object.keys(item)
+          }
+        }
+      )
+    })
+    
+    // await Users.save({
+    //   selector: selector,
+    // });
+    res.json({ msg: "Registration Successful" });
+  } catch (error) {
+    console.log(error);
+  }
+}

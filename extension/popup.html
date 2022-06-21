@@ -1,18 +1,53 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Css Selector</title>
-    <style>
-      body {
-        text-align: center;
-      }
 
-      #hydrateImage {
-        width: 100px;
-        margin: 5px;
-      }
+<head>
+  <title>Css Selector</title>
+  <style>
+    body {
+      text-align: center;
+      width: 300px;
+      height: 100px;
+    }
 
-      /* button {
+    #hydrateImage {
+      width: 100px;
+      margin: 5px;
+    }
+
+    #title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1{
+      color: #008CBA ;
+    }
+
+    button {
+      background-color: #008CBA;
+      border-radius: 10px;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      margin: 10px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      transition-duration: 0.4s;
+    }
+
+    button:hover {
+      background-color: #4CAF50;
+      /* Green */
+      color: white;
+    }
+
+
+
+    /* button {
         margin: 5px;
         outline: none;
       }
@@ -20,17 +55,25 @@
       button:hover {
         outline: #80DEEA dotted thick;
       } */
-    </style>
-    <!--
+  </style>
+  <!--
       - JavaScript and HTML must be in separate files
      -->
-  </head>
-  <body>
-      <img src='./images/stay_hydrated.png' id='hydrateImage'>
-      <!-- <button id="sampleMinute" value="1">Sample minute</button>
-      <button id="min15" value="15">15 Minutes</button>
-      <button id="min30" value="30">30 Minutes</button>
-      <button id="cancelAlarm">Cancel Alarm</button> -->
-   <script src="popup.js"></script>
-  </body>
+</head>
+
+<body>
+  <div id="title">
+    <img src='./images/stay_hydrated.png' id='hydrateImage'>
+    <h1>Text Translate</h1>
+  </div>
+  <div>
+
+    <button id="french">FRENCH</button>
+    <button id="spanish">SPANISH</button>
+  </div>
+
+
+  <script src="popup.js"></script>
+</body>
+
 </html>
