@@ -9,6 +9,9 @@ const Users = db.define(
     selector: {
       type: DataTypes.STRING,
     },
+    unique: {
+      type: DataTypes.STRING,
+    },
     english: {
       type: DataTypes.STRING,
     },
@@ -18,14 +21,18 @@ const Users = db.define(
     spanish: {
       type: DataTypes.STRING,
     },
-    // createdAt: {
-    //   field: "createdAt",
-    //   type: Sequelize.DATE
-    // },
+    createdAt: {
+      field: "createdAt",
+      type: Sequelize.DATE
+    },
+    updatedAt: {
+      field: "updatedAt",
+      type: Sequelize.DATE
+    }
   },
   {
     freezeTableName: true,
-    timestamps: false,
+    timestamps: true,
   },
 );
 
@@ -34,3 +41,5 @@ const Users = db.define(
 })();
 
 export default Users;
+
+

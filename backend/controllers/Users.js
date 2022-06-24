@@ -1,4 +1,5 @@
 import Users from "../models/UserModel.js";
+import Selectors from "../models/Selector.js";
 // import bcrypt from "bcrypt";
 // import jwt from "jsonwebtoken";
 
@@ -16,7 +17,7 @@ export const getUsers = async (req, res) => {
 export const Register = async (req, res) => {
 const {selector} = req.body
   try {
-    await Users.create({
+    await Selectors.create({
       selector: selector,
     });
     res.json({ msg: "Registration Successful" });
@@ -55,12 +56,12 @@ export const Delete = async (req, res) => {
 };
 
 //extension field
-export const getSelector = async(req, res) =>{
+export const getAttribute = async(req, res) =>{
   // res.header("Access-Control-Allow-Origin", "*"); 
 
   try {
     const users = await Users.findAll({
-      attributes: ["selector", "spanish", "french"],
+      attributes: ["unique", "english", "spanish", "french"],
     });
     res.json(users)
     console.log(res.json(users));
@@ -69,28 +70,56 @@ export const getSelector = async(req, res) =>{
   }
 };
 
-export const createSelector = async(req, res) =>{
+export const createAttribute = async(req, res) =>{
   // res.header("Access-Control-Allow-Origin", "*"); 
-  let english = req.body.english
-  try {
-    english.map((item, index) => {
-      Users.update(
-        {
-          english: item[Object.keys(item)]
-        },
-        {
-          where: {
-            selector: Object.keys(item)
-          }
-        }
-      )
-    })
+  // let english = Json.parse(req.body)
+  const result = [];
+  
+  Object.keys(req.body.english).forEach(function(k) {
+    var key = Object.keys(req.body.english[k]);
+    console.log(req.body.english[k][key][0]);
+    result.push({
+      'selector': key,
+      'english': req.body.english[k][key][0],
+      'unique': req.body.english[k][key][1],
+      'createdAt': new Date(),
+      'updatedAt': new Date(),
+    }) 
+  })
+  Users.bulkCreate(result);
+  // try {
+  //   english.map((item, index) => {
+  //     Users.update(
+  //       {
+  //         english: item[Object.keys(item)]
+  //       },
+  //       {
+  //         where: {
+  //           selector: Object.keys(item)
+  //         }
+  //       }
+  //     )
+  //   })
     
-    // await Users.save({
-    //   selector: selector,
-    // });
-    res.json({ msg: "Registration Successful" });
+  //   // await Users.save({
+  //   //   selector: selector,
+  //   // });
+  //   res.json({ msg: "Registration Successful" });
+  // } catch (error) {
+  //   console.log(error);
+  // }
+}
+
+////
+export const getSelector = async(req, res) =>{
+
+  try {
+    const users = await Selectors.findAll({
+      attributes: ["selector"],
+    });
+    res.json(users)
+    console.log(res.json(users));
   } catch (error) {
     console.log(error);
   }
-}
+};

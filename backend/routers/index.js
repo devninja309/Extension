@@ -4,8 +4,9 @@ import {
   Register,
   Update,
   Delete,
+  getAttribute,
+  createAttribute,
   getSelector,
-  createSelector,
 } from "../controllers/Users.js";
 // import { verifyToken } from "../middleware/VerifyToken.js";
 // import { refreshToken } from "../controllers/RefreshToken.js";
@@ -18,7 +19,10 @@ router.put("/update", Update);
 router.delete("/delete", Delete);
 
 //extension call
-router.get("/extension", getSelector);
-router.post("/extension", createSelector);
+router.get("/extension", getAttribute);
+router.post("/extension", createAttribute);
+
+////
+router.get("/selector", getSelector);
 
 export default router;
