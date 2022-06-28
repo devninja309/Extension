@@ -7,14 +7,15 @@ import {
   getAttribute,
   createAttribute,
   getSelector,
+  getSelect,
+  sDelete
 } from "../controllers/Users.js";
 // import { verifyToken } from "../middleware/VerifyToken.js";
 // import { refreshToken } from "../controllers/RefreshToken.js";
 
 const router = express.Router();
 
-router.get("/users",  getUsers);
-router.post("/users", Register);
+router.get("/users", getUsers);
 router.put("/update", Update);
 router.delete("/delete", Delete);
 
@@ -24,5 +25,10 @@ router.post("/extension", createAttribute);
 
 ////
 router.get("/selector", getSelector);
+
+// selector call
+router.post("/select", Register);
+router.get("/select", getSelect);
+router.delete("/select", sDelete);
 
 export default router;

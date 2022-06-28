@@ -35,30 +35,32 @@ const getCssSelectorShort = (el) => {
 // };
 
 const english = [];
-
-fetch("http://localhost:5000/selector")
-  .then((res) => res.json())
-  .then((res) => {
-    res.map((item) => {
-      english.extend(
-        [...document.querySelectorAll("[" + item.selector + "]")].filter(e => e.childElementCount === 0 && e.innerHTML.length !== 0).map((el) => ({
-          [`${item.selector}="${el.getAttribute(item.selector)}"`]: [
-            el.innerText,
-            getCssSelectorShort(el)
-          ]
-        }))
-      );
+if (localStorage.status === "true")
+  fetch("http://localhost:5000/selector")
+    .then((res) => res.json())
+    .then((res) => {
+      res.map((item) => {
+        english.extend(
+          [...document.querySelectorAll("[" + item.selector + "]")]
+            .filter(
+              (e) => e.childElementCount === 0 && e.innerHTML.length !== 0
+            )
+            .map((el) => ({
+              [`${item.selector}="${el.getAttribute(item.selector)}"`]: [
+                el.innerText,
+                getCssSelectorShort(el)
+              ]
+            }))
+        );
+      });
+      fetch("http://localhost:5000/extension", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ english })
+      }).then();
     });
-    console.log(english);
-    fetch("http://localhost:5000/extension", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ english })
-    }).then();
-
-  });
 
 // var english = document.querySelector('[data-qa="title"]').textContent;
 

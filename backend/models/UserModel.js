@@ -7,19 +7,19 @@ const Users = db.define(
   "users",
   {
     selector: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     unique: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     english: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     french: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     spanish: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     createdAt: {
       field: "createdAt",
@@ -32,8 +32,8 @@ const Users = db.define(
   },
   {
     freezeTableName: true,
-    timestamps: true,
-  },
+    timestamps: true
+  }
 );
 
 (async () => {
@@ -41,5 +41,3 @@ const Users = db.define(
 })();
 
 export default Users;
-
-
